@@ -1,42 +1,15 @@
+
 import sys
-import math
-dias = ["Domingo","Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"]	
-def reducer():	
-	salesTotal={}
-	countTotal={}
-	avg_day={}
-	sd_day={}
-	moby_dic={}	
-	arrKey=[]
-	arrSale=[]
-	for line in sys.stdin:
-		data = line.strip().split("\t")
-		if len(data)!=2:
-			continue
-		thisKey, thisSale = data
-		arrKey.append(thisKey)
-		arrSale.append(thisSale) 
-		if thisKey in salesTotal:
-			salesTotal[thisKey] = float(thisSale) + salesTotal[thisKey]
-			countTotal[thisKey] = countTotal[thisKey] + 1
-		else:
-			salesTotal[thisKey] = float(thisSale)
-			countTotal[thisKey] = 1 
-	for thisKey, thisSale in countTotal.items():
-		avg_day[thisKey] = float(salesTotal[thisKey])/float(countTotal[thisKey])	
-	for i in range(0,len(arrKey)):
-		if arrKey[i] in sd_day:
-			sd_day[arrKey[i]] = (float(arrSale[i])-float(avg_day[arrKey[i]]))**2 + sd_day[arrKey[i]]
-		else:
-			sd_day[arrKey[i]] = (float(arrSale[i])-float(avg_day[arrKey[i]]))**2
-	for thisKey, thisSale in sd_day.items():
-		sd_day[thisKey] = math.sqrt(float(sd_day[thisKey])/float(countTotal[thisKey]))
-	print("Media de los dias de la semana")
-	for thisKey, thisSale in avg_day.items():
-		print "{0}\t{1}".format(dias[int(thisKey)],thisSale)
-	print("Desviacion Estandar de los dias de la semana")
-	for thisKey, thisSale in sd_day.items():
-		print "{0}\t{1}".format(dias[int(thisKey)],thisSale)
 
-
-		
+salesTotal={}
+countTotal={}
+for line in sys.stdin:
+	data = line.strip().split("\t")
+        thisKey, thisSale = data 
+        if thisKey in salesTotal:
+            salesTotal[thisKey] = float(thisSale) + salesTotal[thisKey]
+            countTotal[thisKey] = countTotal[thisKey] + 1
+        else:
+            salesTotal[thisKey] = float(thisSale)
+            countTotal[thisKey] = 1
+    print salesTotal
