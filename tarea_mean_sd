@@ -13,3 +13,20 @@ for line in sys.stdin:
             salesTotal[thisKey] = float(thisSale)
             countTotal[thisKey] = 1
     print salesTotal
+    
+    import sys
+def combiner():
+    salesTotal={}
+    countTotal={}
+    for line in sys.stdin:
+        data = line.strip().split("\t")
+        thisKey, thisSale = data 
+        if thisKey in salesTotal:
+            salesTotal[thisKey] = float(thisSale) + salesTotal[thisKey]
+            countTotal[thisKey] = countTotal[thisKey] + 1
+        else:
+            salesTotal[thisKey] = float(thisSale)
+            countTotal[thisKey] = 1
+    print salesTotal
+if name == "main":
+    combiner()
